@@ -268,6 +268,7 @@ end
 
 function findindex(tess::DelaunayTessellation2D{T}, p::T) where T<:AbstractPoint2D
     i::Int64 = tess._last_trig_index
+    count = 0 #jd
     while true
         @inbounds w = intriangle(tess._trigs[i], p)
         w > 0 && return i
@@ -278,6 +279,11 @@ function findindex(tess::DelaunayTessellation2D{T}, p::T) where T<:AbstractPoint
             i = tr._neighbour_b
         else
             i = tr._neighbour_c
+        end
+        #Check for infinite loop, occuring when all triangles have already been looped over #jd
+        count += 1
+        if count > length(tess._trigs)
+            error("point p = $p cannot be inserted. Likely, p is within eps() distance of another point on the grid.")
         end
     end
 end

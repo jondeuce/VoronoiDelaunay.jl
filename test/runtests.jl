@@ -251,7 +251,7 @@ using Test
             for t in tess._trigs[2:tess._last_trig_index]
                 i = incircle(t, p)
                 if i > 0 && ((p == geta(t)) || (p == getb(t)) || (p == getc(t)))
-                    i = 0.
+                    i = 0
                 end
                 @test i <= 0
             end
@@ -274,13 +274,13 @@ using Test
             for t in tess._trigs[2:tess._last_trig_index]
                 i = incircle(t, p)
                 if i > 0 && ((p == geta(t)) || (p == getb(t)) || (p == getc(t)))
-                    i = 0.
+                    i = 0
                 end
                 @test i <= 0
             end
         end
     end
-    
+
     # Iterator test
     @testset begin
     point_arr = Point2D[]
